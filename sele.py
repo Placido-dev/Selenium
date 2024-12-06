@@ -1,0 +1,75 @@
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from datetime import datetime, timedelta
+import time
+
+servico = Service(ChromeDriverManager().install())
+
+navegador = webdriver.Chrome(service=servico)
+time.sleep(1.5)
+navegador.get('https://hpbx.telvoxx.com.br/login')
+time.sleep(3)
+navegador.find_element(By. XPATH, '//*[@id="mat-input-0"]').send_keys('')
+navegador.find_element(By. XPATH, '//*[@id="show-password"]').send_keys('')
+navegador.find_element(By. XPATH, '//*[@id="authentication"]/form/button').click()
+time.sleep(2.5)
+navegador.find_element(By. XPATH, '//*[@id="mat-dialog-0"]/app-need-device-permission-dialog/mat-dialog-actions/button').click()
+time.sleep(2)
+navegador.find_element(By. XPATH, '//*[@id="joyride-step-hint"]/div/div[3]/div[2]/div/joyride-button/button').click()
+navegador.maximize_window()
+time.sleep(1.5)
+navegador.find_element(By. XPATH, '//*[@id="side-bar"]/div/mat-nav-list/a[9]/span').click()
+time.sleep(2)
+navegador.find_element(By. XPATH, '//*[@id="mat-dialog-title-1"]/button/span[1]/mat-icon').click()
+navegador.find_element(By. XPATH, '//*[@id="mat-select-value-1"]/span').click()
+navegador.find_element(By. XPATH, '//*[@id="mat-option-0"]/span').click()
+time.sleep(1)
+navegador.find_element(By. XPATH, '//*[@id="mat-input-2"]').clear()
+
+def calcular_data_util():
+    data = datetime.now() - timedelta(days = 1)
+    while data.weekday() >= 5:
+        data -= timedelta(days = 1)
+    return data.strftime('%d/%m/%Y')
+    
+data_util = calcular_data_util()
+
+navegador.find_element(By. XPATH, '//*[@id="mat-input-2"]').send_keys(data_util)
+navegador.find_element(By. XPATH, '//*[@id="mat-input-2"]').send_keys(Keys.TAB)
+navegador.find_element(By. XPATH, '//*[@id="mat-input-2"]').send_keys('00:00:00')
+navegador.find_element(By. XPATH, '//*[@id="mat-input-2"]').send_keys(Keys.TAB)
+navegador.find_element(By. XPATH, '//*[@id="mat-input-3"]').send_keys(data_util)
+navegador.find_element(By. XPATH, '//*[@id="mat-input-3"]').send_keys(Keys.TAB)
+navegador.find_element(By. XPATH, '//*[@id="mat-input-4"]').send_keys('1001')
+navegador.find_element(By. XPATH, '//*[@id="actions"]/button[1]').click()
+time.sleep(2)
+navegador.find_element(By. XPATH, '//*[@id="actions"]/button[2]/span[1]/mat-icon').click()
+navegador.find_element(By. XPATH, '//*[@id="mat-dialog-2"]/ng-component/div[2]/button').click()
+navegador.find_element(By. XPATH, '//*[@id="mat-dialog-title-2"]/button').click()
+navegador.find_element(By. XPATH, '//*[@id="mat-input-4"]').clear()
+navegador.find_element(By. XPATH, '//*[@id="mat-input-4"]').send_keys('1005')
+navegador.find_element(By. XPATH, '//*[@id="actions"]/button[1]').click()
+time.sleep(2)
+navegador.find_element(By. XPATH, '//*[@id="actions"]/button[2]/span[1]/mat-icon').click()
+navegador.find_element(By. XPATH, '//*[@id="mat-dialog-3"]/ng-component/div[2]/button').click()
+navegador.find_element(By. XPATH, '//*[@id="mat-dialog-title-3"]/button').click()
+navegador.find_element(By. XPATH, '//*[@id="mat-input-4"]').clear()
+navegador.find_element(By. XPATH, '//*[@id="mat-input-4"]').send_keys('1006')
+navegador.find_element(By. XPATH, '//*[@id="actions"]/button[1]').click()
+time.sleep(1.5)
+navegador.find_element(By. XPATH, '//*[@id="actions"]/button[2]/span[1]/mat-icon').click()
+navegador.find_element(By. XPATH, '//*[@id="mat-dialog-4"]/ng-component/div[2]/button').click()
+time.sleep(1.5)
+navegador.find_element(By. XPATH, '//*[@id="mat-dialog-title-4"]/button/span[1]/mat-icon').click()
+navegador.find_element(By. XPATH, '//*[@id="mat-input-4"]').clear()
+navegador.find_element(By. XPATH, '//*[@id="mat-input-4"]').send_keys('1013')
+navegador.find_element(By. XPATH, '//*[@id="actions"]/button[1]').click()
+time.sleep(1.5)
+navegador.find_element(By. XPATH, '//*[@id="actions"]/button[2]/span[1]/mat-icon').click()
+navegador.find_element(By. XPATH, '//*[@id="mat-dialog-5"]/ng-component/div[2]/button').click()
+navegador.find_element(By. XPATH, '//*[@id="mat-dialog-title-5"]/button').click()
+time.sleep(2.5)
+navegador.close()
